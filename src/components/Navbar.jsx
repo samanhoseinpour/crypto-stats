@@ -22,7 +22,7 @@ const getItem = (label, key, icon) => {
 const items = [
   getItem(<Link to="/">Home</Link>, 'home', <HomeOutlined />),
   getItem(
-    <Link to="/cryptocurrencies">Crypto Currencies</Link>,
+    <Link to="/cryptocurrencies">Cryptocurrencies</Link>,
     'cryptocurrencies',
     <MoneyCollectOutlined />
   ),
