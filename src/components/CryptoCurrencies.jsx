@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import millify from 'millify';
 import { Link } from 'react-router-dom';
 import { Row, Col, Input, Card } from 'antd';
@@ -7,21 +7,38 @@ import { useGetCoinsQuery } from '../services/features/coinsApi';
 
 const CryptoCurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
-  const { data: coinsList, error, isLoading } = useGetCoinsQuery(count);
-  const [coins, setCoins] = useState(coinsList?.data?.coins);
 
-  console.log(coins);
+  const { data: coinsList, error, isLoading } = useGetCoinsQuery(count);
+  const [coins, setCoins] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const filteredData = coinsList?.data?.coins.filter((coin) =>
+      coin.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setCoins(filteredData);
+  }, [coinsList, searchTerm]);
+
+  if (error) return 'Failed to fetch cryptocurrencies';
 
   if (isLoading) return 'Loading...';
-
   return (
     <>
+      {!simplified && (
+        <div className="search-crypto">
+          <Input
+            placeholder="Search Cryptocurrencies"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      )}
       <Row gutter={[32, 32]} className="crypto-card-container">
         {coins?.map((coin) => (
           <Col xs={24} sm={12} lg={6} className="crypto-card" key={coin.uuid}>
             <Link to={`/crypto/${coin.id}`}>
               <Card
-                title={`${coin.rank}. ${coin.symbol}`}
+                title={`${coin.rank}. ${coin.name}`}
                 extra={
                   <img
                     className="crypto-image"
@@ -31,6 +48,7 @@ const CryptoCurrencies = ({ simplified }) => {
                 }
                 hoverable
               >
+                <p>Symbol: {coin.symbol}</p>
                 <p>Price: {millify(coin.price)}$</p>
                 <p>Market Cap: {millify(coin.marketCap)}</p>
                 <p
