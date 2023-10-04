@@ -25,17 +25,19 @@ const CryptoCurrencies = ({ simplified }) => {
   if (isLoading) return 'Loading...';
   return (
     <>
-      <Typography.Title level={2} className="heading">
-        Today's <span className="text-gradient">Cryptocurrency</span> Prices by
-        MarketCap
-      </Typography.Title>
       {!simplified && (
-        <div className="search-crypto">
-          <Input
-            placeholder="Search Cryptocurrencies"
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
+        <>
+          <Typography.Title level={2} className="heading">
+            Today's <span className="text-gradient">Cryptocurrency</span> Prices
+            by MarketCap
+          </Typography.Title>
+          <div className="search-crypto">
+            <Input
+              placeholder="Search Cryptocurrencies"
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </>
       )}
       <Row gutter={[32, 32]} className="crypto-card-container">
         {coins?.map((coin) => (
