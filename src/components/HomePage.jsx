@@ -3,12 +3,16 @@ import { Typography, Row, Col, Statistic } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { useGetCoinsQuery } from '../services/features/coinsApi';
+import { CryptoCurrencies, News } from '../components';
+
 const { Title } = Typography;
 
 const HomePage = () => {
   const { data, error, isLoading } = useGetCoinsQuery();
 
-  const globalStats = data?.data?.stats;
+  const globalStats = data?.data.stats;
+
+  if (error) return 'Failed to fetch coins data!';
 
   if (isLoading) return 'Loading...';
 
@@ -49,6 +53,28 @@ const HomePage = () => {
           />
         </Col>
       </Row>
+      <div className="home-heading-container">
+        <Title level={2} className="home-title">
+          Top 10 Cryptocurrencies in the World
+        </Title>
+        <Title level={3}>
+          <Link to="/cryptocurrencies" className="show-more">
+            Show More
+          </Link>
+        </Title>
+      </div>
+      <CryptoCurrencies simplified />
+      <div className="home-heading-container">
+        <Title level={2} className="home-title">
+          Latest Crypto news
+        </Title>
+        <Title level={3}>
+          <Link to="/news" className="show-more">
+            Show More
+          </Link>
+        </Title>
+      </div>
+      <News simplified />
     </>
   );
 };
