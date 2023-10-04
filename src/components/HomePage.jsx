@@ -8,7 +8,7 @@ import { CryptoCurrencies, News } from '../components';
 const { Title } = Typography;
 
 const HomePage = () => {
-  const { data, error, isLoading } = useGetCoinsQuery();
+  const { data, error, isLoading } = useGetCoinsQuery(10);
 
   const globalStats = data?.data.stats;
 
@@ -19,7 +19,8 @@ const HomePage = () => {
   return (
     <>
       <Title level={2} className="heading">
-        Crypto data and insights at your fingertips
+        Crypto <span className="text-gradient">data and insights</span> at your
+        fingertips
       </Title>
       <Row>
         <Col span={12}>
@@ -55,10 +56,11 @@ const HomePage = () => {
       </Row>
       <div className="home-heading-container">
         <Title level={2} className="home-title">
-          Top 10 Cryptocurrencies in the World
+          Top 10 <span className="text-gradient">Cryptocurrencies</span> in the
+          World
         </Title>
         <Title level={3}>
-          <Link to="/cryptocurrencies" className="show-more">
+          <Link to="/cryptocurrencies" className="show-more text-gradient">
             Show More
           </Link>
         </Title>
@@ -66,10 +68,10 @@ const HomePage = () => {
       <CryptoCurrencies simplified />
       <div className="home-heading-container">
         <Title level={2} className="home-title">
-          Latest Crypto news
+          Latest <span className="text-gradient">Crypto</span> news
         </Title>
         <Title level={3}>
-          <Link to="/news" className="show-more">
+          <Link to="/news" className="show-more text-gradient">
             Show More
           </Link>
         </Title>

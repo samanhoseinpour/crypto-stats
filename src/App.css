@@ -375,3 +375,18 @@ a:hover {
   padding: 20px;
   align-items: center;
 }
+
+.text-gradient {
+  background: -webkit-linear-gradient(0deg, #000000 0%, #48abe0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.negativeChange {
+  color: red;
+  font-weight: bold;
+}
+.positiveChange {
+  color: green;
+  font-weight: bold;
+}
