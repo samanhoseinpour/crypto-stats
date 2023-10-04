@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import millify from 'millify';
 import { Link } from 'react-router-dom';
-import { Row, Col, Input, Card } from 'antd';
+import { Row, Col, Input, Card, Typography } from 'antd';
 
 import { useGetCoinsQuery } from '../services/features/coinsApi';
 
 const CryptoCurrencies = ({ simplified }) => {
-  const count = simplified ? 10 : 100;
+  const count = simplified ? 10 : 200;
 
   const { data: coinsList, error, isLoading } = useGetCoinsQuery(count);
   const [coins, setCoins] = useState([]);
@@ -25,6 +25,10 @@ const CryptoCurrencies = ({ simplified }) => {
   if (isLoading) return 'Loading...';
   return (
     <>
+      <Typography.Title level={2} className="heading">
+        Today's <span className="text-gradient">Cryptocurrency</span> Prices by
+        MarketCap
+      </Typography.Title>
       {!simplified && (
         <div className="search-crypto">
           <Input
