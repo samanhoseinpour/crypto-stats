@@ -47,9 +47,8 @@ const News = ({ simplified }) => {
                 option.children.toLowerCase().indexOf(input.toLowerCase()) > 0
               }
             >
-              <Option value="Cryptocurrencies"></Option>
               {data?.data.coins.map((coin) => (
-                <Option key={coin.uuid} value={coin.symbol}></Option>
+                <Option key={coin.uuid} value={coin.name}></Option>
               ))}
             </Select>
           </Col>
