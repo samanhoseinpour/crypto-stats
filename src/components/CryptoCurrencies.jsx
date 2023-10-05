@@ -28,7 +28,8 @@ const CryptoCurrencies = ({ simplified }) => {
       {!simplified && (
         <>
           <Typography.Title level={2} className="heading">
-            Today's <span className="text-gradient">Cryptocurrency</span> Prices
+            Today's{' '}
+            <span className="text-gradient">Cryptocurrency Prices </span>
             by MarketCap
           </Typography.Title>
           <div className="search-crypto">

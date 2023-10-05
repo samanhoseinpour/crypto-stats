@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Select, Typography, Row, Col, Avatar, Card } from 'antd';
 import moment from 'moment';
 
 import { useGetNewsQuery } from '../services/features/newsApi';
+import { useGetCoinsQuery } from '../services/features/coinsApi';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -9,23 +11,50 @@ const demoImage =
   'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
 
 const News = ({ simplified }) => {
+  const [newsCategory, setNewsCategory] = useState('Cryptocurrency');
+
   const {
     data: coinNews,
     error,
     isLoading,
   } = useGetNewsQuery({
-    newsCategory: 'Cryptocurrency',
+    newsCategory,
     count: simplified ? 6 : 100,
   });
+
+  const { data } = useGetCoinsQuery(200);
 
   if (error) return 'Failed to fetch news';
 
   if (isLoading) return 'Loading...';
 
-  console.log(coinNews?.value);
-
   return (
     <Row gutter={[24, 24]}>
+      {!simplified && (
+        <>
+          <Typography.Title level={2} className="heading">
+            <span className="text-gradient">Cryptocurrency Latest News</span> by
+            24h Change
+          </Typography.Title>
+          <Col span={24}>
+            <Select
+              showSearch
+              className="select-news"
+              placeholder="Search a Coin"
+              optionFilterProp="children"
+              onChange={(value) => setNewsCategory(value)}
+              filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) > 0
+              }
+            >
+              <Option value="Cryptocurrencies"></Option>
+              {data?.data.coins.map((coin) => (
+                <Option key={coin.uuid} value={coin.symbol}></Option>
+              ))}
+            </Select>
+          </Col>
+        </>
+      )}
       {coinNews?.value.map((news, i) => (
         <Col xs={24} sm={12} lg={8} key={i}>
           <Card className="news-card" hoverable>
