@@ -4,6 +4,7 @@ import moment from 'moment';
 
 import { useGetNewsQuery } from '../services/features/newsApi';
 import { useGetCoinsQuery } from '../services/features/coinsApi';
+import Loader from './Loader';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -26,7 +27,7 @@ const News = ({ simplified }) => {
 
   if (error) return 'Failed to fetch news';
 
-  if (isLoading) return 'Loading...';
+  if (isLoading) return <Loader />;
 
   return (
     <Row gutter={[24, 24]}>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Input, Card, Typography } from 'antd';
 
 import { useGetCoinsQuery } from '../services/features/coinsApi';
+import Loader from './Loader';
 
 const CryptoCurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 200;
@@ -22,7 +23,7 @@ const CryptoCurrencies = ({ simplified }) => {
 
   if (error) return 'Failed to fetch cryptocurrencies';
 
-  if (isLoading) return 'Loading...';
+  if (isLoading) return <Loader />;
   return (
     <>
       {!simplified && (

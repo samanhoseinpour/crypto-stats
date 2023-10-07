@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { useGetCoinsQuery } from '../services/features/coinsApi';
 import { CryptoCurrencies, News } from '../components';
+import Loader from './Loader';
 
 const { Title } = Typography;
 
@@ -14,7 +15,7 @@ const HomePage = () => {
 
   if (error) return 'Failed to fetch coins data!';
 
-  if (isLoading) return 'Loading...';
+  if (isLoading) return <Loader />;
 
   return (
     <>
