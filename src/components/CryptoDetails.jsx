@@ -15,19 +15,28 @@ import {
   InfoCircleOutlined,
 } from '@ant-design/icons';
 
-import { useGetCoinDetailsQuery } from '../services/features/coinsApi';
+import {
+  useGetCoinDetailsQuery,
+  useGetCoinHistoryQuery,
+} from '../services/features/coinsApi';
+import LineChart from './LineChart';
+
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 const CryptoDetails = () => {
   const { coinId } = useParams();
-  const [timePeriod, setTimePeriod] = useState('7d');
+  const [timePeriod, setTimePeriod] = useState('24h');
   const { data, error, isLoading } = useGetCoinDetailsQuery(coinId);
+  const { data: coinHistory } = useGetCoinHistoryQuery({ coinId, timePeriod });
   const cryptoDetails = data?.data?.coin;
 
-  console.log(cryptoDetails);
+  console.log(coinHistory);
 
-  const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
+  if (error) return 'Failed to fetch coin details.';
+  if (isLoading) return 'Loading...';
+
+  const time = ['3h', '24h', '7d', '30d', '3m', '1y', '3y', '5y'];
 
   const stats = [
     {
@@ -126,7 +135,11 @@ const CryptoDetails = () => {
             <Option key={date}>{date}</Option>
           ))}
         </Select>
-        {/* Line chart */}
+        <LineChart
+          coinHistory={coinHistory}
+          coinName={cryptoDetails?.name}
+          currentPrice={millify(cryptoDetails?.price)}
+        />
         <Col className="stats-container">
           <Col className="coin-value-statistics">
             <Col className="coin-value-statistics-heading">
@@ -180,7 +193,7 @@ const CryptoDetails = () => {
               {cryptoDetails?.name} Links
             </Title>
             {cryptoDetails?.links.map((link) => (
-              <Row className="coin-link" key={link.name}>
+              <Row className="coin-link" key={link.url}>
                 <Title className="link-name" level={5}>
                   {link.type}
                 </Title>
