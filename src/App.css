@@ -390,3 +390,7 @@ a:hover {
   color: green;
   font-weight: bold;
 }
+
+.coin-detail {
+  margin-top: 20px;
+}
