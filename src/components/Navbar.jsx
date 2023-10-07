@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Typography, Button, Layout, Avatar, Menu } from 'antd';
+import { useState, useEffect } from 'react';
+import { Typography, Button, Avatar, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import {
   MoneyCollectOutlined,
@@ -36,6 +36,26 @@ const items = [
 
 const Navbar = () => {
   const [current, setCurrent] = useState('home');
+  const [activeMenu, setActiveMenu] = useState(true);
+  const [screenSize, setScreenSize] = useState(undefined);
+
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (screenSize <= 800) {
+      setActiveMenu(false);
+    } else {
+      setActiveMenu(true);
+    }
+  }, [screenSize]);
 
   const onActive = (e) => {
     setCurrent(e.key);
@@ -48,13 +68,21 @@ const Navbar = () => {
         <Typography.Title level={2} className="logo">
           <Link to="/">Crypto Stats</Link>
         </Typography.Title>
+        <Button
+          className="menu-control-container"
+          onClick={() => setActiveMenu(!activeMenu)}
+        >
+          <MenuOutlined />
+        </Button>
       </div>
-      <Menu
-        theme="dark"
-        items={items}
-        selectedKeys={[current]}
-        onClick={onActive}
-      />
+      {activeMenu && (
+        <Menu
+          theme="dark"
+          items={items}
+          selectedKeys={[current]}
+          onClick={onActive}
+        />
+      )}
     </div>
   );
 };
