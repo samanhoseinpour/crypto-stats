@@ -5,7 +5,6 @@ import {
   MoneyCollectOutlined,
   BulbOutlined,
   HomeOutlined,
-  FundOutlined,
   MenuOutlined,
 } from '@ant-design/icons';
 
@@ -25,11 +24,6 @@ const items = [
     <Link to="/cryptocurrencies">Cryptocurrencies</Link>,
     'cryptocurrencies',
     <MoneyCollectOutlined />
-  ),
-  getItem(
-    <Link to="/exchanges">Exchanges</Link>,
-    'exchanges',
-    <FundOutlined />
   ),
   getItem(<Link to="/news">News</Link>, 'news', <BulbOutlined />),
 ];
