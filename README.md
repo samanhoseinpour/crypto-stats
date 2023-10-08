@@ -15,7 +15,7 @@ Crypto data and insights, at your fingertips.
 To install Crypto Stats, simply clone the repository:
 
 ```sh
-$ git clone https://github.com/your-username/crypto-stats.git
+$ git clone https://github.com/samanhoseinpour/crypto-stats.git
 ```
 
 Once the repository is cloned, you can install the dependencies:
