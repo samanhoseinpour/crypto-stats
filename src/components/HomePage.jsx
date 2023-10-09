@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useGetCoinsQuery } from '../services/features/coinsApi';
 import { CryptoCurrencies, News } from '../components';
 import Loader from './Loader';
+import { Banned } from './';
 
 const { Title } = Typography;
 
@@ -13,7 +14,7 @@ const HomePage = () => {
 
   const globalStats = data?.data.stats;
 
-  if (error) return 'Failed to fetch coins data!';
+  if (error) return <Banned />;
 
   if (isLoading) return <Loader />;
 

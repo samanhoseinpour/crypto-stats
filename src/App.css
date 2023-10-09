@@ -402,3 +402,7 @@ a:hover {
   text-align: center;
   border-radius: 4px;
 }
+
+.h-full {
+  height: 82vh;
+}
