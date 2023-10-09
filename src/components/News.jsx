@@ -26,11 +26,7 @@ const News = ({ simplified }) => {
 
   const { data } = useGetCoinsQuery(200);
 
-<<<<<<< HEAD
-  if (error) return 'Failed to fetch news';
-=======
   if (error) return <Banned />;
->>>>>>> feat
 
   if (isLoading) return <Loader />;
 
