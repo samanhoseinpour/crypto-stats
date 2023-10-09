@@ -12,7 +12,7 @@ const Banned = () => (
     title="Our website doesn't available in your country."
     subTitle="Please check and modify your IP address."
     extra={[
-      <Link to={window.location}>
+      <Link to="/">
         <Button type="primary" onClick={() => refreshPage()}>
           Reload
         </Button>
