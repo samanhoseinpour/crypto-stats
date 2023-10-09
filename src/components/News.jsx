@@ -5,6 +5,7 @@ import moment from 'moment';
 import { useGetNewsQuery } from '../services/features/newsApi';
 import { useGetCoinsQuery } from '../services/features/coinsApi';
 import Loader from './Loader';
+import { Banned } from './';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -25,7 +26,7 @@ const News = ({ simplified }) => {
 
   const { data } = useGetCoinsQuery(200);
 
-  if (error) return 'Failed to fetch news';
+  if (error) return <Banned />;
 
   if (isLoading) return <Loader />;
 

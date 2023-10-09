@@ -5,6 +5,7 @@ import { Row, Col, Input, Card, Typography } from 'antd';
 
 import { useGetCoinsQuery } from '../services/features/coinsApi';
 import Loader from './Loader';
+import { Banned } from './';
 
 const CryptoCurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 200;
@@ -21,7 +22,7 @@ const CryptoCurrencies = ({ simplified }) => {
     setCoins(filteredData);
   }, [coinsList, searchTerm]);
 
-  if (error) return 'Failed to fetch cryptocurrencies';
+  if (error) return <Banned />;
 
   if (isLoading) return <Loader />;
   return (
