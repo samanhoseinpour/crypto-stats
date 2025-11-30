@@ -26,7 +26,14 @@ const News = ({ simplified }) => {
 
   const { data } = useGetCoinsQuery(200);
 
-  if (error) return <Banned />;
+  if (error)
+    return (
+      <Banned
+        status="error"
+        title="News feed unavailable"
+        subTitle="We can't reach the crypto news service right now. Check your RapidAPI key/region and try again."
+      />
+    );
 
   if (isLoading) return <Loader />;
 

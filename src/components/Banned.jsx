@@ -1,16 +1,16 @@
-import { Button, Result } from 'antd';
-import { Link } from 'react-router-dom';
+import { Button, Result } from "antd";
+import { Link } from "react-router-dom";
 
 const refreshPage = () => {
   window.location.reload();
 };
 
-const Banned = () => (
+const Banned = ({ status, title, subTitle }) => (
   <Result
     className="h-full"
-    status="error"
-    title="Our website doesn't available in your country."
-    subTitle="Please check and modify your IP address."
+    status={status}
+    title={title}
+    subTitle={subTitle}
     extra={[
       <Link to="/">
         <Button type="primary" onClick={() => refreshPage()}>
